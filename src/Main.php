@@ -17,7 +17,7 @@ class Main extends PluginBase implements Listener{
     public $config;
 
 
-	public function onEnable() : void {
+    public function onEnable() : void {
         $this->saveResource("config.yml");
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->chunks = (int) $this->config->get('chunks');
