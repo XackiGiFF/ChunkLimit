@@ -13,7 +13,7 @@ use pocketmine\Server;
 use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener{
-    private $settings;
+    public $settings;
 
 
 	public function onEnable() : void {
