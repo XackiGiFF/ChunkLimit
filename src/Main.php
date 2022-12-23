@@ -20,15 +20,15 @@ class Main extends PluginBase implements Listener{
 	public function onEnable() : void {
         $this->saveResource("config.yml");
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-        $this->chunks = $this->config->get('chunks');
+        $this->chunks = (int) $this->config->get('chunks');
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
     public function onReceive(DataPacketReceiveEvent $event) : void {
-        $chunks = (int) $this->chunks ?? 16;
+        $chunks = $this->chunks ?? 16;
         if (($pk = $event->getPacket()) instanceof RequestChunkRadiusPacket )
             if($pk->radius > $chunks)
-                $pk->radius = (int) $this->settings['chunks'];
+                $pk->radius = $this->chunks;
     }
 
 }
