@@ -13,14 +13,13 @@ use pocketmine\Server;
 use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener{
-    private $config;
     private $settings;
 
 
 	public function onEnable() : void {
         $this->saveResource("config.yml");
         $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-        $this->settings = $this->getConfig()->getAll();
+        $this->settings = $this->config->getAll();
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
