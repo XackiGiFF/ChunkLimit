@@ -13,28 +13,22 @@ use pocketmine\Server;
 use pocketmine\utils\Config;
 
 class Main extends PluginBase implements Listener{
-    private static Main $instance;
-    private static $config;
-    private static $settings;
+    private $config;
+    private $settings;
 
-
-    public static function getInstance() : Main {
-		return self::$instance;
-	}
 
 	public function onEnable() : void {
-        self::$instance = $this;
-        self::getInstance()->saveResource("config.yml");
-        self::$config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-        self::$settings = $this->getConfig()->getAll();
-        self::getInstance()->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->saveResource("config.yml");
+        $this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+        $this->settings = $this->getConfig()->getAll();
+        $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
     public function onReceive(DataPacketReceiveEvent $event) : void {
-        $chunks = (int) self::settings['chunks'] ?? 16;
+        $chunks = (int) $this->settings['chunks'] ?? 16;
         if (($pk = $event->getPacket()) instanceof RequestChunkRadiusPacket )
             if($pk->radius > $chunks)
-                $pk->radius = (int) self::settings['chunks'];
+                $pk->radius = (int) $this->settings['chunks'];
     }
 
 }
