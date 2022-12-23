@@ -1,0 +1,2 @@
+#This is set chunk limit on Packet level. It`s can fix error with RakLib (While RakLib ban ip, server and clients requests more chunks. Set limit for fix it)
+chunks: 16
