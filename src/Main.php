@@ -25,7 +25,7 @@ class Main extends PluginBase implements Listener{
         self::$instance = $this;
         self::getInstance()->saveResource("config.yml");
         self::$config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
-        self::settings = $this->getConfig()->getAll();
+        self::$settings = $this->getConfig()->getAll();
         self::getInstance()->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
